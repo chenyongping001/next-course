@@ -1,15 +1,19 @@
-import Link from "next/link";
-import ProductCard from "./components/ProductCard";
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+"use client";
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
   return (
     <main>
-      <h1>Hello {session && session.user!.name}</h1>
-      <Link href="/users">Users</Link>
-      <ProductCard />
+      <h1>Hello World</h1>
+      <button
+        onClick={async () => {
+          const _ = (await import("lodash")).default;
+          const users = [{ name: "c" }, { name: "b" }, { name: "a" }];
+          const sorted = _.orderBy(users, ["name"]);
+          console.log(sorted);
+        }}
+      >
+        Show
+      </button>
     </main>
   );
 }
